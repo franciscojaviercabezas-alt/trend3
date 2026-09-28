@@ -15,6 +15,10 @@ import androidx.glance.layout.fillMaxSize
 import androidx.glance.text.Text
 import androidx.datastore.preferences.core.stringPreferencesKey
 
+suspend fun refreshWidgetDataSuspend(context: Context) {
+    // Función global requerida por Receiver y Worker
+}
+
 class TendenciasGlanceWidget : GlanceAppWidget() {
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
@@ -50,10 +54,6 @@ class TendenciasGlanceWidget : GlanceAppWidget() {
             mutablePrefs.toPreferences()
         }
         update(context, glanceId)
-    }
-
-    suspend fun refreshWidgetDataSuspend(context: Context) {
-        // Método invocado por TrendsUpdateWorker y TendenciasWidgetReceiver
     }
 
     fun getComponent(context: Context): ComponentName {
