@@ -13,14 +13,14 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Configurar Java
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v5
       with:
         java-version: '17'
         distribution: 'temurin'
 
     - name: Buscar y dar permisos a gradlew
       run: |
-        GRADLEW_PATH=$(find . -name gradlew -type f)
+        GRADLEW_PATH=$(find . -name gradlew -type f | head -n 1)
         echo "GRADLEW_PATH=$GRADLEW_PATH" >> $GITHUB_ENV
         chmod +x "$GRADLEW_PATH"
 
