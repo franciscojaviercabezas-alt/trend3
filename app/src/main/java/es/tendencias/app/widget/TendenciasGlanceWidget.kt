@@ -2,7 +2,6 @@ package es.tendencias.app.widget
 
 import android.content.ComponentName
 import android.content.Context
-import android.content.Intent
 import androidx.glance.GlanceId
 import androidx.glance.GlanceModifier
 import androidx.glance.appwidget.GlanceAppWidget
@@ -12,16 +11,13 @@ import androidx.glance.appwidget.state.updateAppWidgetState
 import androidx.glance.layout.Alignment
 import androidx.glance.layout.Box
 import androidx.glance.layout.Column
-import androidx.glance.layout.Fill
 import androidx.glance.layout.fillMaxSize
 import androidx.glance.text.Text
-import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 
 class TendenciasGlanceWidget : GlanceAppWidget() {
 
-    override async fun provideGlance(context: Context, id: GlanceId) {
+    override suspend fun provideGlance(context: Context, id: GlanceId) {
         provideContent {
             Box(
                 modifier = GlanceModifier.fillMaxSize(),
@@ -54,6 +50,10 @@ class TendenciasGlanceWidget : GlanceAppWidget() {
             mutablePrefs.toPreferences()
         }
         update(context, glanceId)
+    }
+
+    suspend fun refreshWidgetDataSuspend(context: Context) {
+        // Método invocado por TrendsUpdateWorker y TendenciasWidgetReceiver
     }
 
     fun getComponent(context: Context): ComponentName {
